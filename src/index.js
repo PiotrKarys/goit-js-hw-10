@@ -12,7 +12,7 @@ const apiKey =
 
 axios.defaults.headers.common['x-api-key'] = apiKey;
 
-let isFirstLoad = true; // Zmienna śledząca pierwsze załadowanie strony
+let isFirstLoad = true;
 
 async function init() {
   try {
@@ -52,7 +52,7 @@ function showLoader() {
   loader.style.display = 'inline-block';
   error.style.display = 'none';
   catInfo.innerHTML = '';
-  hideCatImage(); // Ukryj obrazek tylko jeśli nie jest to pierwsze załadowanie
+  hideCatImage();
 }
 
 function hideLoader() {
@@ -73,7 +73,7 @@ function renderCatInfo(catData) {
   const catBreed = cat.breeds[0];
   const catImage = document.getElementById('cat-image');
   catImage.src = cat.url;
-  catImage.style.display = 'block'; // Wyświetl obrazek
+  catImage.style.display = 'block';
   catInfo.innerHTML = `
     <h2>${catBreed.name}</h2>
     <p><strong>Description:</strong> ${catBreed.description}</p>
@@ -81,17 +81,17 @@ function renderCatInfo(catData) {
   `;
 
   if (isFirstLoad) {
-    isFirstLoad = false; // Ustaw isFirstLoad na false po pierwszym załadowaniu
+    isFirstLoad = false;
   }
 }
 
 function hideCatImage() {
   if (isFirstLoad) {
-    return; // Nic nie rób, jeśli to pierwsze załadowanie
+    return;
   }
   const catImage = document.getElementById('cat-image');
-  catImage.style.display = 'none'; // Ukryj obrazek
-  catInfo.innerHTML = ''; // Wyczyść ewentualne informacje
+  catImage.style.display = 'none';
+  catInfo.innerHTML = '';
 }
 
 breedSelect.addEventListener('change', () => {
