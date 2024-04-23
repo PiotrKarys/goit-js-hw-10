@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
+import Notiflix from 'notiflix';
 
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
@@ -18,7 +19,9 @@ async function init() {
     updateSelect(breeds);
   } catch (err) {
     console.error('Error while fetching cat breeds data', err);
-    showError();
+    Notiflix.Notify.failure('Oops! Something went wrong!', {
+      position: 'center-center',
+    });
   } finally {
     hideLoader();
   }
@@ -31,14 +34,16 @@ async function displayCatInfo(breedId) {
     renderCatInfo(catData);
   } catch (err) {
     console.error('Error while fetching cat data', err);
-    showError();
+    Notiflix.Notify.failure('Oops! Something went wrong!', {
+      position: 'center-center',
+    });
   } finally {
     hideLoader();
   }
 }
 
 function showLoader() {
-  loader.style.display = 'block';
+  loader.style.display = 'inline-block';
   error.style.display = 'none';
   catInfo.innerHTML = '';
 }
@@ -47,9 +52,9 @@ function hideLoader() {
   loader.style.display = 'none';
 }
 
-function showError() {
-  error.style.display = 'block';
-}
+// function showError() {
+//   error.style.display = 'inline-block';
+// }
 
 function updateSelect(breeds) {
   breeds.forEach(breed => {
@@ -67,7 +72,7 @@ function renderCatInfo(catData) {
     <h2>${catBreed.name}</h2>
     <p><strong>Description:</strong> ${catBreed.description}</p>
     <p><strong>Temperament:</strong> ${catBreed.temperament}</p>
-    <img src="${cat.url}" alt="Cat Image">
+    <img src="${cat.url}" alt="Cat Image" style="width: 100%; height: auto;">
   `;
 }
 

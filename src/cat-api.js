@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 const apiKey =
   'live_2iAb0JJ0kYQGOajFpJdtWEgu2YpNS1738lXSkrniIrHsoRdSuAGZG86H0sZSB0O0';
@@ -12,7 +13,9 @@ export async function fetchBreeds() {
     return response.data;
   } catch (error) {
     console.error('Error while fetching cat breeds data', error);
-    throw new Error('Error while fetching cat breeds data');
+    Notiflix.Notify.failure('Oops! Something went wrong!', {
+      position: 'center-center',
+    });
   }
 }
 
@@ -24,6 +27,8 @@ export async function fetchCatByBreed(breedId) {
     return response.data;
   } catch (error) {
     console.error('Error while fetching cat data', error);
-    throw new Error('Error while fetching cat data');
+    Notiflix.Notify.failure('Oops! Something went wrong!', {
+      position: 'center-center',
+    });
   }
 }
